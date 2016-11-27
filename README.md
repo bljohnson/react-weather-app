@@ -7,6 +7,9 @@
 	* Allows you to bundle all third party dependencies along with your application code
 	* Allows you to separate components into their own files and include them, which makes testing and scaling easier
 
+* Keep webpack running to constantly watch for file changes
+`webpack -w`
+
 * Install third party dependencies locally
 `npm install --save react@0.14.7 react-dom@0.14.7`
 	* Updates package.json file, telling project which versions of modules you want to have installed, and adding them to node_modules folder
