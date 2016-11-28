@@ -25218,26 +25218,45 @@
 
 		getInitialState: function getInitialState() {
 			return {
-				location: 'Miami',
-				temp: 88
+				isLoading: false
 			};
 		},
 		handleSearch: function handleSearch(location) {
 			var that = this;
+			this.setState({
+				isLoading: true
+			});
 			openWeatherMap.getTemp(location).then(function (temp) {
 				that.setState({
 					location: location,
-					temp: temp
+					temp: temp,
+					isLoading: false
 				});
 			}, function (errorMessage) {
 				alert(errorMessage);
+				that.setState({
+					isLoading: false
+				});
 			});
 		},
 		render: function render() {
 			var _state = this.state,
+			    isLoading = _state.isLoading,
 			    temp = _state.temp,
 			    location = _state.location;
+			// determine whether to show weather message or loading message inside of component
 
+			function renderMessage() {
+				if (isLoading) {
+					return React.createElement(
+						'h3',
+						null,
+						'Fetching weather...'
+					);
+				} else if (temp && location) {
+					return React.createElement(WeatherMessage, { temp: temp, location: location });
+				}
+			}
 			return React.createElement(
 				'div',
 				null,
@@ -25247,7 +25266,7 @@
 					'Weather Component'
 				),
 				React.createElement(WeatherForm, { onSearch: this.handleSearch }),
-				React.createElement(WeatherMessage, { temp: temp, location: location })
+				renderMessage()
 			);
 		}
 	});
@@ -25339,15 +25358,15 @@
 			// properly encode location string for browser
 			var encodedLocation = encodeURIComponent(location);
 			var requestUrl = OPEN_WEATHER_MAP_URL + '&q=' + encodedLocation;
-			// axios fetches URL results. axios returns a promise - sends error to error handler or temp to success case in Weather.jsx 
+			// axios fetches URL results. axios returns a promise - sends error to error handler or temp to success case in Weather.jsx
 			return axios.get(requestUrl).then(function (res) {
 				if (res.data.cod && res.data.message) {
 					throw new Error(res.data.message);
 				} else {
 					return res.data.main.temp;
 				}
-			}, function (res) {
-				throw new Error(res.data.message);
+			}, function (err) {
+				throw new Error(err.response.data.message);
 			});
 		}
 	};

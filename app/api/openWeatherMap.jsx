@@ -8,15 +8,15 @@ module.exports = {
 		// properly encode location string for browser
 		var encodedLocation = encodeURIComponent(location);
 		var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
-		// axios fetches URL results. axios returns a promise - sends error to error handler or temp to success case in Weather.jsx 
+		// axios fetches URL results. axios returns a promise - sends error to error handler or temp to success case in Weather.jsx
 		return axios.get(requestUrl).then(function(res){
 			if(res.data.cod && res.data.message){
 				throw new Error(res.data.message);
 			} else{
 				return res.data.main.temp;
 			}
-		}, function(res){
-			throw new Error(res.data.message);
+		}, function(err){
+			throw new Error(err.response.data.message);
 		});
 	}
 }
