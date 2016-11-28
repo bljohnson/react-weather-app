@@ -10,6 +10,7 @@ module.exports = {
 		var requestUrl = `${OPEN_WEATHER_MAP_URL}&q=${encodedLocation}`;
 		// axios fetches URL results. axios returns a promise - sends error to error handler or temp to success case in Weather.jsx
 		return axios.get(requestUrl).then(function(res){
+			// debugger;
 			if(res.data.cod && res.data.message){
 				throw new Error(res.data.message);
 			} else{
