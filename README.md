@@ -1,4 +1,5 @@
-#Boilerplate project for React apps
+#React Weather App
 
-* Install plug-in that supports additional experimental Javascript features
-`npm install babel-preset-stage-0 --save-dev`
+* Created under the guidance of the Udemy course, "The Complete React Web App Developer Course"
+* Install React router inside of app
+`npm install react-router@2.0.0 --save`
