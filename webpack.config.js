@@ -1,5 +1,22 @@
+var webpack = require('webpack');
+
 module.exports = {
-	entry: './app/app.jsx',
+	entry: [
+		'script!jquery/dist/jquery.min.js',
+		'script!foundation-sites/dist/foundation.min.js',
+		'./app/app.jsx'
+	],
+	// module name: variable name we want available in external script files
+	externals: {
+		jquery: 'jQuery'
+	},
+	// tell provide plugin which variable name to look for, then the module to replace it with
+	plugins: [
+		new webpack.ProvidePlugin({
+			'$': 'jquery',
+			'jQuery': 'jquery'
+		})
+	],
 	output: {
 		path: __dirname,
 		filename: './public/bundle.js'

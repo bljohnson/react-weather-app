@@ -5,3 +5,5 @@
 `npm install react-router@2.0.0 --save`
 * Install npm module, Axios to aid in requesting API URL and pulling temperature data from it
 `npm install axios --save`
+* Install webpack plug-ins for scripts and styles
+`npm install css-loader@0.23.1 script-loader@0.6.1 style-loader@0.13.0 jquery@2.2.1 foundation-sites@6.2.0 --save-dev `

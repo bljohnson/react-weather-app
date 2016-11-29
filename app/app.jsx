@@ -7,6 +7,11 @@ var Weather = require('Weather');
 var About = require('About');
 var Examples = require('Examples');
 
+// load Foundation. use css loader to enable require to load css file. use style loader to inject into html.
+require('style!css!foundation-sites/dist/foundation.min.css')
+// fire up Foundation
+$(document).foundation();
+
 ReactDOM.render(
 	// set up Router
 	<Router history={hashHistory}>
