@@ -12,6 +12,9 @@ require('style!css!foundation-sites/dist/foundation.min.css')
 // fire up Foundation
 $(document).foundation();
 
+// app custom css - load app styles module using css loader, then pass into style loader which adds it to html so visible in browser
+require('style!css!applicationStyles');
+
 ReactDOM.render(
 	// set up Router
 	<Router history={hashHistory}>
